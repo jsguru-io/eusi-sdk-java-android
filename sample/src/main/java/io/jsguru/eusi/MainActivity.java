@@ -5,7 +5,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -15,18 +14,8 @@ import java.util.Calendar;
 import io.jsguru.eusisdk.Eusi;
 import io.jsguru.eusisdk.EusiClient;
 import io.jsguru.eusisdk.EusiQuery;
-import io.jsguru.eusisdk.callbacks.EusiContentCallback;
-import io.jsguru.eusisdk.callbacks.EusiFormCallback;
-import io.jsguru.eusisdk.callbacks.EusiSubmitFormCallback;
-import io.jsguru.eusisdk.callbacks.EusiTaxonomyCallback;
-import io.jsguru.eusisdk.exceptions.EusiContentException;
 import io.jsguru.eusisdk.exceptions.EusiException;
 import io.jsguru.eusisdk.exceptions.EusiSubmitFormException;
-import io.jsguru.eusisdk.models.EusiPagination;
-import io.jsguru.eusisdk.models.content.EusiContentResponse;
-import io.jsguru.eusisdk.models.content.helpers.Document;
-import io.jsguru.eusisdk.models.form.EusiFormResponse;
-import io.jsguru.eusisdk.models.taxonomy.EusiTaxonomyResponse;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -94,76 +83,76 @@ public class MainActivity extends AppCompatActivity {
 //                }
 //            });
 
-            String formID = "63176253-7e66-4fca-b3db-7d35a2bb6711";
-            String fromString = "{ \"FFg\" : \"valueSample02\" }";
-            Log.d("TAG+++", "fromString: " + fromString);
-            try {
-                eusiClient.submitFormAsync(formID, new JSONObject(fromString), new EusiSubmitFormCallback() {
-
-                    @Override
-                    public void onSuccess(String response, String formID) {
-                        Log.e("TAG+++", "getFormAsync(): formID: " + formID + " | response: " + response);
-                        Log.e("TAG+++", "getFormAsync(): formID: " + formID + " | response: " + response);
-                    }
-
-                    @Override
-                    public void onFailure(String message, String validation) {
-                        Log.e("TAG+++", "getFormAsync(): errorMessage: " + message);
-                        Log.e("TAG+++", "getFormAsync(): validationFailed: " + validation);
-                    }
-                });
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-
-
-//            final String formID = "a2243937-c7b7-4d39-871e-d4cbaa3af2ff";
-            final String formID02 = "63176253-7e66-4fca-b3db-7d35a2bb6711";
-            eusiClient.getFormAsync(formID02, new EusiFormCallback() {
-                @Override
-                public void onSuccess(EusiFormResponse response) {
-                    Log.e("TAG+++", "getFormAsync(): formID: " + formID02 + " | response: " + response.getResponseString());
-
-                    JSONObject object = new JSONObject();
-                    try {
-//                        object.put("Text field", "txt1");
-//                        object.put("Email field", "mail@something.com");
-//                        object.put("Date field", Calendar.getInstance().getTimeInMillis());
-//                        object.put("List field", "[\"value01\", \"value02\"]");
-
-                        object.put("FFg+", "sdasfasdsa");
-                        object.put("mailmail", "mail@gmail.com");
-                        object.put("dd", "" + Calendar.getInstance().getTimeInMillis());
-                        object.put("ddt", "" + Calendar.getInstance().getTimeInMillis());
-                        object.put("tf", true);
-                        object.put("urls", "https://lol.com");
-
-                        object.put("jjj", "val01");
-
-
-                        eusiClient.submitFormAsync(formID02, object, new EusiSubmitFormCallback() {
-                            @Override
-                            public void onSuccess(String response, String formId) {
-                                Log.e("TAG+++", "submitFormAsync(): response: " + response );
-                                Log.e("TAG+++", "submitFormAsync(): response: " + response );
-                            }
-
-                            @Override
-                            public void onFailure(String message, String validation) {
-                                Log.e("TAG+++", "submitFormAsync(): error: " + message + " | validation: " + validation);
-                                Log.e("TAG+++", "submitFormAsync(): error: " + message + " | validation: " + validation);
-                            }
-                        });
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-                }
-
-                @Override
-                public void onFailure(String message) {
-                    Log.e("TAG+++", "getFormAsync(): errorMessage: " + message);
-                }
-            });
+//            String formID = "63176253-7e66-4fca-b3db-7d35a2bb6711";
+//            String fromString = "{ \"FFg\" : \"valueSample02\" }";
+//            Log.d("TAG+++", "fromString: " + fromString);
+//            try {
+//                eusiClient.submitFormAsync(formID, new JSONObject(fromString), new EusiSubmitFormCallback() {
+//
+//                    @Override
+//                    public void onSuccess(String response, String formID) {
+//                        Log.e("TAG+++", "getFormAsync(): formID: " + formID + " | response: " + response);
+//                        Log.e("TAG+++", "getFormAsync(): formID: " + formID + " | response: " + response);
+//                    }
+//
+//                    @Override
+//                    public void onFailure(String message, String validation) {
+//                        Log.e("TAG+++", "getFormAsync(): errorMessage: " + message);
+//                        Log.e("TAG+++", "getFormAsync(): validationFailed: " + validation);
+//                    }
+//                });
+//            } catch (JSONException e) {
+//                e.printStackTrace();
+//            }
+//
+//
+////            final String formID = "a2243937-c7b7-4d39-871e-d4cbaa3af2ff";
+//            final String formID02 = "63176253-7e66-4fca-b3db-7d35a2bb6711";
+//            eusiClient.getFormAsync(formID02, new EusiFormCallback() {
+//                @Override
+//                public void onSuccess(EusiFormResponse response) {
+//                    Log.e("TAG+++", "getFormAsync(): formID: " + formID02 + " | response: " + response.getResponseString());
+//
+//                    JSONObject object = new JSONObject();
+//                    try {
+////                        object.put("Text field", "txt1");
+////                        object.put("Email field", "mail@something.com");
+////                        object.put("Date field", Calendar.getInstance().getTimeInMillis());
+////                        object.put("List field", "[\"value01\", \"value02\"]");
+//
+//                        object.put("FFg+", "sdasfasdsa");
+//                        object.put("mailmail", "mail@gmail.com");
+//                        object.put("dd", "" + Calendar.getInstance().getTimeInMillis());
+//                        object.put("ddt", "" + Calendar.getInstance().getTimeInMillis());
+//                        object.put("tf", true);
+//                        object.put("urls", "https://lol.com");
+//
+//                        object.put("jjj", "val01");
+//
+//
+//                        eusiClient.submitFormAsync(formID02, object, new EusiSubmitFormCallback() {
+//                            @Override
+//                            public void onSuccess(String response, String formId) {
+//                                Log.e("TAG+++", "submitFormAsync(): response: " + response );
+//                                Log.e("TAG+++", "submitFormAsync(): response: " + response );
+//                            }
+//
+//                            @Override
+//                            public void onFailure(String message, String validation) {
+//                                Log.e("TAG+++", "submitFormAsync(): error: " + message + " | validation: " + validation);
+//                                Log.e("TAG+++", "submitFormAsync(): error: " + message + " | validation: " + validation);
+//                            }
+//                        });
+//                    } catch (JSONException e) {
+//                        e.printStackTrace();
+//                    }
+//                }
+//
+//                @Override
+//                public void onFailure(String message) {
+//                    Log.e("TAG+++", "getFormAsync(): errorMessage: " + message);
+//                }
+//            });
 
 
 //            eusiClient.authorizeAsync(new EusiAuthorizeCallback() {
@@ -328,44 +317,40 @@ public class MainActivity extends AppCompatActivity {
 //                        e.printStackTrace();
 //                    }
 //                    Log.d("TAG+++", "resultForm END");
-////
-//                    try {
-//                        Log.d("TAG+++", "resultFormPost START");
-//                        String formID = "63176253-7e66-4fca-b3db-7d35a2bb6711";
-//                        Log.d("TAG+++", "formID: " + formID);
-//                        JSONObject object = new JSONObject();
-//                            object.put("FFg+", "sdasfasdsa");
-//                            object.put("mailmail", "mail@gmail.com");
-//                            object.put("dd", "" + Calendar.getInstance().getTimeInMillis());
-//                            object.put("ddt", "" + Calendar.getInstance().getTimeInMillis());
-//                            object.put("tf", true);
-//                            object.put("urls", "https://lol.com");
 //
-//
-//                        String res = client.submitForm(formID, object);
-//
-//                        Log.d("TAG+++", "res: " + res);
-//
-//
-//
-//                    } catch (IOException e){
-//                        Log.e("TAG+++", "IOException.getMessage(): " + e.getMessage());
-//                        Log.e("TAG+++", "IOException.getLocalizedMessage: " + e.getLocalizedMessage());
-//                        Log.e("TAG+++", "IOException.getCause: " + e.getCause());
-//
-//                        e.printStackTrace();
-//                    } catch (JSONException e) {
-//                        e.printStackTrace();
-//                    }
-//                    catch (EusiContentException e) {
-//                        Log.d("TAG+++", "EusiContentException: " + e.getErrorMessage());
-//                        e.printStackTrace();
-//                    }
-//                    catch (EusiSubmitFormException e){
-//                        Log.d("TAG+++", "EusiSubmitFormException: " + e.getErrorMessage());
-//                        e.printStackTrace();
-//                    }
-//                    Log.d("TAG+++", "resultFormPost END");
+                    try {
+                        Log.d("TAG+++", "resultFormPost START");
+                        String formID = "63176253-7e66-4fca-b3db-7d35a2bb6711";
+                        Log.d("TAG+++", "formID: " + formID);
+                        JSONObject object = new JSONObject();
+                            object.put("FFg", "sdasfasdsa");
+                            object.put("mailmail", "mail@gmail.com");
+                            object.put("dd", "" + Calendar.getInstance().getTimeInMillis());
+                            object.put("ddt", "" + Calendar.getInstance().getTimeInMillis());
+                            object.put("tf", true);
+                            object.put("urls", "https://lol.com");
+
+
+                        boolean res = client.submitForm(formID, object);
+
+                        Log.d("TAG+++", "submitForm(): " + res);
+
+
+
+                    } catch (IOException e){
+                        Log.e("TAG+++", "IOException.getMessage(): " + e.getMessage());
+                        Log.e("TAG+++", "IOException.getLocalizedMessage: " + e.getLocalizedMessage());
+                        Log.e("TAG+++", "IOException.getCause: " + e.getCause());
+
+                        e.printStackTrace();
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                    catch (EusiSubmitFormException e){
+                        Log.d("TAG+++", "EusiSubmitFormException: " + e.getErrorMessage());
+                        e.printStackTrace();
+                    }
+                    Log.d("TAG+++", "resultFormPost END");
 //
 //                    String resultTaxonomy = null;
 //                    try {

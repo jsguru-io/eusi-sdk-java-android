@@ -537,6 +537,7 @@ public class EusiClient {
     /**
      * Get form by Form Id (synchronously)
      * @param formID Form Id
+     *
      * @return EusiFormResponse object
      * @throws IOException if there is networking problem
      * @throws EusiContentException if eusiClient isn't authorised, in case of bad parameters, in case of invalid form id, ...
@@ -617,11 +618,12 @@ public class EusiClient {
      * Submit form (synchronously)
      * @param formID Form Id
      * @param formBody Form Body as JSON object
-     * @return TODO !!!
+     *
+     * @return true if submission is successful, throws EusiSubmitFormException exception otherwise
      * @throws IOException if there is networking problem
      * @throws EusiSubmitFormException if eusiClient isn't authorised, in case of bad parameters, in case of invalid form id, in case of validation form failure, ...
      */
-    public String submitForm(String formID, JSONObject formBody) throws IOException, EusiSubmitFormException {
+    public boolean submitForm(String formID, JSONObject formBody) throws IOException, EusiSubmitFormException {
         if(authToken == null && userToken == null)
             throw new EusiSubmitFormException(EusiContentException.ErrorContent.ERROR_CODE_NOT_AUTHORIZED, EusiContentException.ErrorContent.ERROR_NOT_AUTHORIZED);
 
@@ -633,7 +635,7 @@ public class EusiClient {
                     EusiNetworking.getErrorMessage(response),
                     EusiNetworking.getValidationMessage(response));
 
-        return response;
+        return eusiParser.parseSubmitForm(response);
     }
 
     /**
@@ -692,6 +694,7 @@ public class EusiClient {
     /**
      * Get taxonomy by Taxonomy Id (synchronously)
      * @param taxonomyID Taxonomy Id
+     *
      * @return EusiTaxonomyResponse object
      * @throws IOException if there is networking problem
      * @throws EusiContentException if eusiClient isn't authorised, in case of bad parameters, ...

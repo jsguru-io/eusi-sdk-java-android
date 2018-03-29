@@ -157,6 +157,18 @@ class EusiParser {
         return formResponse;
     }
 
+    boolean parseSubmitForm(String response){
+        boolean successful = false;
+        try {
+            JSONObject object = new JSONObject(response);
+            if(object.has("success"))
+                successful = object.getBoolean("success");
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return successful;
+    }
+
 
     //Helpers
     private EusiContentType parseOneContentType(JSONObject content) throws JSONException{
