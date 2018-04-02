@@ -33,8 +33,10 @@ import io.jsguru.eusisdk.models.taxonomy.EusiTaxonomy;
 import io.jsguru.eusisdk.models.taxonomy.EusiTaxonomyResponse;
 
 /**
- * Created by Petar Suvajac on 3/22/2018
- * Contact: petars38@gmail.com / petar.suvajac@jsguru.io
+ * Util class to map raw response to objects
+ *
+ * @author Petar Suvajac (petars38@gmail.com / petar.suvajac@jsguru.io)
+ * @version 1.0
  */
 
 class EusiParser {

@@ -9,15 +9,12 @@ import java.util.List;
 import io.jsguru.eusisdk.exceptions.EusiException;
 
 /**
- * Class is entry point to Eusi SDK and holds references to all EusiClient
- * Used to create EusiClient objects and hold references to them
+ * Class is entry point to Eusi SDK.
+ * Used to create EusiClient objects and hold references to them.
  *
- * @author Petar Suvajac
+ * @author Petar Suvajac (petars38@gmail.com / petar.suvajac@jsguru.io)
  * @version 1.0
- * @see EusiClient
- *
- * Created by Petar Suvajac on 3/8/2018
- * Contact: petars38@gmail.com / petar.suvajac@jsguru.io
+ * @see EusiClient EusiClient
  */
 
 public class Eusi {

@@ -4,8 +4,10 @@ import android.os.Build;
 import android.support.annotation.RequiresApi;
 
 /**
- * Created by Petar Suvajac on 3/8/2018
- * Contact: petars38@gmail.com / petar.suvajac@jsguru.io
+ * Superclass for known Eusi exceptions
+ *
+ * @author Petar Suvajac (petars38@gmail.com / petar.suvajac@jsguru.io)
+ * @version 1.0
  */
 
 public class EusiException extends Exception {

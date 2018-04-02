@@ -24,16 +24,13 @@ import okhttp3.Callback;
 import okhttp3.Response;
 
 /**
- * Class provides main functionality of Eusi SDK
+ * Class provides main functionality for Eusi SDK
  * Created from Eusi object
  * Used for main interaction with Eusi Delivery API
  *
- * @author Petar Suvajac
+ * @author Petar Suvajac (petars38@gmail.com / petar.suvajac@jsguru.io)
  * @version 1.0
- * @see Eusi
- *
- * Created by Petar Suvajac on 3/8/2018
- * Contact: petars38@gmail.com / petar.suvajac@jsguru.io
+ * @see Eusi Eusi
  */
 
 public class EusiClient {
@@ -47,6 +44,7 @@ public class EusiClient {
     private static final String ACTION_FORMS = "forms";
     private static final String ACTION_TAXONOMY = "taxonomy";
 
+    // Eusi
     private Eusi eusi;
 
     // Bucket Id

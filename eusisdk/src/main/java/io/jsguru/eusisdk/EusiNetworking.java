@@ -16,8 +16,10 @@ import okhttp3.RequestBody;
 import okhttp3.Response;
 
 /**
- * Created by Petar Suvajac on 3/8/2018
- * Contact: petars38@gmail.com / petar.suvajac@jsguru.io
+ * Util class for networking operations
+ *
+ * @author Petar Suvajac (petars38@gmail.com / petar.suvajac@jsguru.io)
+ * @version 1.0
  */
 
 class EusiNetworking {

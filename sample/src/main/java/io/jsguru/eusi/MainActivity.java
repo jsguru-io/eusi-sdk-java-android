@@ -318,39 +318,39 @@ public class MainActivity extends AppCompatActivity {
 //                    }
 //                    Log.d("TAG+++", "resultForm END");
 //
-                    try {
-                        Log.d("TAG+++", "resultFormPost START");
-                        String formID = "63176253-7e66-4fca-b3db-7d35a2bb6711";
-                        Log.d("TAG+++", "formID: " + formID);
-                        JSONObject object = new JSONObject();
-                            object.put("FFg", "sdasfasdsa");
-                            object.put("mailmail", "mail@gmail.com");
-                            object.put("dd", "" + Calendar.getInstance().getTimeInMillis());
-                            object.put("ddt", "" + Calendar.getInstance().getTimeInMillis());
-                            object.put("tf", true);
-                            object.put("urls", "https://lol.com");
-
-
-                        boolean res = client.submitForm(formID, object);
-
-                        Log.d("TAG+++", "submitForm(): " + res);
-
-
-
-                    } catch (IOException e){
-                        Log.e("TAG+++", "IOException.getMessage(): " + e.getMessage());
-                        Log.e("TAG+++", "IOException.getLocalizedMessage: " + e.getLocalizedMessage());
-                        Log.e("TAG+++", "IOException.getCause: " + e.getCause());
-
-                        e.printStackTrace();
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-                    catch (EusiSubmitFormException e){
-                        Log.d("TAG+++", "EusiSubmitFormException: " + e.getErrorMessage());
-                        e.printStackTrace();
-                    }
-                    Log.d("TAG+++", "resultFormPost END");
+//                    try {
+//                        Log.d("TAG+++", "resultFormPost START");
+//                        String formID = "63176253-7e66-4fca-b3db-7d35a2bb6711";
+//                        Log.d("TAG+++", "formID: " + formID);
+//                        JSONObject object = new JSONObject();
+//                            object.put("FFg", "sdasfasdsa");
+//                            object.put("mailmail", "mail@gmail.com");
+//                            object.put("dd", "" + Calendar.getInstance().getTimeInMillis());
+//                            object.put("ddt", "" + Calendar.getInstance().getTimeInMillis());
+//                            object.put("tf", true);
+//                            object.put("urls", "https://lol.com");
+//
+//
+//                        boolean res = client.submitForm(formID, object);
+//
+//                        Log.d("TAG+++", "submitForm(): " + res);
+//
+//
+//
+//                    } catch (IOException e){
+//                        Log.e("TAG+++", "IOException.getMessage(): " + e.getMessage());
+//                        Log.e("TAG+++", "IOException.getLocalizedMessage: " + e.getLocalizedMessage());
+//                        Log.e("TAG+++", "IOException.getCause: " + e.getCause());
+//
+//                        e.printStackTrace();
+//                    } catch (JSONException e) {
+//                        e.printStackTrace();
+//                    }
+//                    catch (EusiSubmitFormException e){
+//                        Log.d("TAG+++", "EusiSubmitFormException: " + e.getErrorMessage());
+//                        e.printStackTrace();
+//                    }
+//                    Log.d("TAG+++", "resultFormPost END");
 //
 //                    String resultTaxonomy = null;
 //                    try {

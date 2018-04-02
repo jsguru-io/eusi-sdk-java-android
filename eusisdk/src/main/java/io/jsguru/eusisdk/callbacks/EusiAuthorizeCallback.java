@@ -1,11 +1,30 @@
 package io.jsguru.eusisdk.callbacks;
 
 /**
- * Created by Petar Suvajac on 3/12/2018
- * Contact: petars38@gmail.com / petar.suvajac@jsguru.io
+ * Callback to be used with authorise asynchronous call in {@link io.jsguru.eusisdk.EusiClient}
+ * <p>
+ * Implement {@link #onSuccess(String, String)} to receive response and authorization token if request was successful
+ * <p>
+ * Implement {@link #onFailure(String)} to receive error message if request was unsuccessful
+ *
+ *
+ * @author Petar Suvajac (petars38@gmail.com / petar.suvajac@jsguru.io)
+ * @version 1.0
  */
 
 public abstract class EusiAuthorizeCallback extends EusiCallback {
+    /**
+     * Called if auth call in EusiClient was successful
+     * @param response Delivery API response
+     * @param authToken Authorization token
+     *
+     * @see io.jsguru.eusisdk.EusiClient
+     */
     public abstract void onSuccess(String response, String authToken);
+
+    /**
+     * Called if auth call in EusiClient was unsuccessful
+     * @param message Error message
+     */
     public abstract void onFailure(String message);
 }
