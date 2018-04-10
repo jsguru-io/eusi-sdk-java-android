@@ -5,11 +5,11 @@ import java.util.ArrayList;
 import io.jsguru.eusisdk.models.content.helpers.TaxonomyItem;
 
 /**
- * Created by Petar Suvajac on 3/20/2018
- * Contact: petars38@gmail.com / petar.suvajac@jsguru.io
+ * @author Petar Suvajac (petars38@gmail.com / petar.suvajac@jsguru.io)
+ * @version 1.0
  */
 
-public class EusiContentTaxonomyPicker extends EusiContentType {
+public class EusiContentTaxonomyPickerPicker extends EusiContentTypePicker {
     private String taxonomyId;
     private String taxonomyKey;
     private String pickerName;
@@ -67,6 +67,6 @@ public class EusiContentTaxonomyPicker extends EusiContentType {
 
     @Override
     public Class getType() {
-        return EusiContentTaxonomyPicker.class;
+        return EusiContentTaxonomyPickerPicker.class;
     }
 }

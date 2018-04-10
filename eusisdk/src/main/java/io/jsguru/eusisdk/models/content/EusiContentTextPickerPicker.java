@@ -1,11 +1,11 @@
 package io.jsguru.eusisdk.models.content;
 
 /**
- * Created by Petar Suvajac on 3/20/2018
- * Contact: petars38@gmail.com / petar.suvajac@jsguru.io
+ * @author Petar Suvajac (petars38@gmail.com / petar.suvajac@jsguru.io)
+ * @version 1.0
  */
 
-public class EusiContentRichTextPicker extends EusiContentType {
+public class EusiContentTextPickerPicker extends EusiContentTypePicker {
     private String name;
     private String text;
 
@@ -25,8 +25,9 @@ public class EusiContentRichTextPicker extends EusiContentType {
         this.text = text;
     }
 
+
     @Override
     public Class getType() {
-        return EusiContentRichTextPicker.class;
+        return EusiContentTextPickerPicker.class;
     }
 }

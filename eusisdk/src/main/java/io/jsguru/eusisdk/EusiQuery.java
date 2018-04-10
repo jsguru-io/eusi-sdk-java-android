@@ -29,6 +29,16 @@ public class EusiQuery {
         String queryString = "?";
 
         /**
+         * @param contentId Content Id
+         * @return Builder
+         */
+        public Builder withId(String contentId) {
+            prepareString();
+            queryString += "sys.key=" + contentId;
+            return this;
+        }
+
+        /**
          * @param contentName Content name
          * @return Builder
          */
@@ -37,7 +47,6 @@ public class EusiQuery {
             queryString += "sys.name=" + contentName;
             return this;
         }
-
 
         /**
          * @param contentType Content type

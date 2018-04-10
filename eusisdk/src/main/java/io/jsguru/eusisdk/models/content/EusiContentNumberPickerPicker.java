@@ -1,11 +1,11 @@
 package io.jsguru.eusisdk.models.content;
 
 /**
- * Created by Petar Suvajac on 3/20/2018
- * Contact: petars38@gmail.com / petar.suvajac@jsguru.io
+ * @author Petar Suvajac (petars38@gmail.com / petar.suvajac@jsguru.io)
+ * @version 1.0
  */
 
-public class EusiContentNumberPicker extends EusiContentType {
+public class EusiContentNumberPickerPicker extends EusiContentTypePicker {
     private String name;
     private int number;
 
@@ -27,6 +27,6 @@ public class EusiContentNumberPicker extends EusiContentType {
 
     @Override
     public Class getType() {
-        return EusiContentNumberPicker.class;
+        return EusiContentNumberPickerPicker.class;
     }
 }

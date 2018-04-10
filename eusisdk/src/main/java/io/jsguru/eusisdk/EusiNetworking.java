@@ -37,12 +37,14 @@ class EusiNetworking {
         Request.Builder requestBuilder = new Request.Builder()
                 .url(url);
 
-        // Set headers
-        Iterator<String> iterator = headers.keySet().iterator();
-        while (iterator.hasNext()) {
-            String key = (String) iterator.next();
-            String value = (String) headers.get(key);
-            requestBuilder.addHeader(key, value);
+        if(headers != null){
+            // Set headers
+            Iterator<String> iterator = headers.keySet().iterator();
+            while (iterator.hasNext()) {
+                String key = (String) iterator.next();
+                String value = (String) headers.get(key);
+                requestBuilder.addHeader(key, value);
+            }
         }
 
         if(callback == null){
@@ -65,12 +67,14 @@ class EusiNetworking {
                 .url(url)
                 .post(RequestBody.create(mediaType, requestBody));
 
-        // Set headers
-        Iterator<String> iterator = headers.keySet().iterator();
-        while (iterator.hasNext()) {
-            String key = (String) iterator.next();
-            String value = (String) headers.get(key);
-            requestBuilder.addHeader(key, value);
+        if(headers != null){
+            // Set headers
+            Iterator<String> iterator = headers.keySet().iterator();
+            while (iterator.hasNext()) {
+                String key = (String) iterator.next();
+                String value = (String) headers.get(key);
+                requestBuilder.addHeader(key, value);
+            }
         }
 
         if(callback == null){

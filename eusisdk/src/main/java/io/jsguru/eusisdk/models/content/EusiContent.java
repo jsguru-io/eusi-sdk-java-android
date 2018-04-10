@@ -3,8 +3,8 @@ package io.jsguru.eusisdk.models.content;
 import java.util.ArrayList;
 
 /**
- * Created by Petar Suvajac on 3/22/2018
- * Contact: petars38@gmail.com / petar.suvajac@jsguru.io
+ * @author Petar Suvajac (petars38@gmail.com / petar.suvajac@jsguru.io)
+ * @version 1.0
  */
 
 public class EusiContent {
@@ -13,13 +13,13 @@ public class EusiContent {
     private String key;
     private String templateID;
     private long publishedAt;
-    private ArrayList<EusiContentType> contentList = new ArrayList<>();
+    private ArrayList<EusiContentTypePicker> contentList = new ArrayList<>();
 
-    public ArrayList<EusiContentType> getContent() {
+    public ArrayList<EusiContentTypePicker> getContent() {
         return contentList;
     }
 
-    public void setContent(ArrayList<EusiContentType> contentList) {
+    public void setContent(ArrayList<EusiContentTypePicker> contentList) {
         this.contentList = contentList;
     }
 
