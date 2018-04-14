@@ -5,9 +5,9 @@ package io.jsguru.eusisdk.models.content;
  * @version 1.0
  */
 
-public class EusiContentNumberPickerPicker extends EusiContentTypePicker {
+public class EusiContentTextPicker extends EusiContentTypePicker {
     private String name;
-    private int number;
+    private String text;
 
     public String getName() {
         return name;
@@ -17,16 +17,17 @@ public class EusiContentNumberPickerPicker extends EusiContentTypePicker {
         this.name = name;
     }
 
-    public int getNumber() {
-        return number;
+    public String getText() {
+        return text;
     }
 
-    public void setNumber(int number) {
-        this.number = number;
+    public void setText(String text) {
+        this.text = text;
     }
+
 
     @Override
     public Class getType() {
-        return EusiContentNumberPickerPicker.class;
+        return EusiContentTextPicker.class;
     }
 }

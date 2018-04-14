@@ -5,9 +5,10 @@ package io.jsguru.eusisdk.models.content;
  * @version 1.0
  */
 
-public class EusiContentRichTextPickerPicker extends EusiContentTypePicker {
+public class EusiContentCodePicker extends EusiContentTypePicker {
     private String name;
     private String text;
+    private String language;
 
     public String getName() {
         return name;
@@ -25,8 +26,16 @@ public class EusiContentRichTextPickerPicker extends EusiContentTypePicker {
         this.text = text;
     }
 
+    public String getLanguage() {
+        return language;
+    }
+
+    public void setLanguage(String language) {
+        this.language = language;
+    }
+
     @Override
     public Class getType() {
-        return EusiContentRichTextPickerPicker.class;
+        return EusiContentCodePicker.class;
     }
 }

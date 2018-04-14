@@ -9,13 +9,18 @@ import io.jsguru.eusisdk.models.content.helpers.TaxonomyItem;
  * @version 1.0
  */
 
-public class EusiContentTaxonomyPickerPicker extends EusiContentTypePicker {
+public class EusiContentTaxonomyPicker extends EusiContentTypePicker {
     private String taxonomyId;
     private String taxonomyKey;
     private String pickerName;
     private String taxonomyName;
     private ArrayList<TaxonomyItem> taxonomyItems = new ArrayList<>();
     private ArrayList<String> taxonomyItemsList = new ArrayList<>();
+
+    @Override
+    public String getName() {
+        return pickerName;
+    }
 
     public String getTaxonomyId() {
         return taxonomyId;
@@ -67,6 +72,6 @@ public class EusiContentTaxonomyPickerPicker extends EusiContentTypePicker {
 
     @Override
     public Class getType() {
-        return EusiContentTaxonomyPickerPicker.class;
+        return EusiContentTaxonomyPicker.class;
     }
 }

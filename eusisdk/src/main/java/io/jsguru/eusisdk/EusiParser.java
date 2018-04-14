@@ -11,17 +11,17 @@ import java.util.Date;
 
 import io.jsguru.eusisdk.models.EusiPagination;
 import io.jsguru.eusisdk.models.content.EusiContent;
-import io.jsguru.eusisdk.models.content.EusiContentCodePickerPicker;
-import io.jsguru.eusisdk.models.content.EusiContentDatePickerPicker;
-import io.jsguru.eusisdk.models.content.EusiContentDocumentPickerPicker;
-import io.jsguru.eusisdk.models.content.EusiContentImagePickerPicker;
-import io.jsguru.eusisdk.models.content.EusiContentLocationPickerPicker;
-import io.jsguru.eusisdk.models.content.EusiContentMediaPickerPicker;
-import io.jsguru.eusisdk.models.content.EusiContentNumberPickerPicker;
+import io.jsguru.eusisdk.models.content.EusiContentCodePicker;
+import io.jsguru.eusisdk.models.content.EusiContentDatePicker;
+import io.jsguru.eusisdk.models.content.EusiContentDocumentPicker;
+import io.jsguru.eusisdk.models.content.EusiContentImagePicker;
+import io.jsguru.eusisdk.models.content.EusiContentLocationPicker;
+import io.jsguru.eusisdk.models.content.EusiContentMediaPicker;
+import io.jsguru.eusisdk.models.content.EusiContentNumberPicker;
 import io.jsguru.eusisdk.models.content.EusiContentResponse;
-import io.jsguru.eusisdk.models.content.EusiContentRichTextPickerPicker;
-import io.jsguru.eusisdk.models.content.EusiContentTaxonomyPickerPicker;
-import io.jsguru.eusisdk.models.content.EusiContentTextPickerPicker;
+import io.jsguru.eusisdk.models.content.EusiContentRichTextPicker;
+import io.jsguru.eusisdk.models.content.EusiContentTaxonomyPicker;
+import io.jsguru.eusisdk.models.content.EusiContentTextPicker;
 import io.jsguru.eusisdk.models.content.EusiContentTypePicker;
 import io.jsguru.eusisdk.models.content.helpers.Document;
 import io.jsguru.eusisdk.models.content.helpers.Image;
@@ -181,29 +181,29 @@ class EusiParser {
         if(type == null || type.isEmpty()){
             return null;
         } else if (type.equals("input-text")){
-            EusiContentTextPickerPicker picker = new EusiContentTextPickerPicker();
+            EusiContentTextPicker picker = new EusiContentTextPicker();
             picker.setName(content.getString("type"));
             picker.setText(content.getString("value"));
             return picker;
         } else if(type.equals("input-number")){
-            EusiContentNumberPickerPicker picker = new EusiContentNumberPickerPicker();
+            EusiContentNumberPicker picker = new EusiContentNumberPicker();
             picker.setName(content.getString("type"));
             picker.setNumber(content.getInt("value"));
             return picker;
         } else if(type.equals("rich-text-input")){
-            EusiContentRichTextPickerPicker picker = new EusiContentRichTextPickerPicker();
+            EusiContentRichTextPicker picker = new EusiContentRichTextPicker();
             picker.setName(content.getString("type"));
             picker.setText(content.getString("value"));
             return picker;
         } else if(type.equals("code-picker")){
-            EusiContentCodePickerPicker picker = new EusiContentCodePickerPicker();
+            EusiContentCodePicker picker = new EusiContentCodePicker();
             picker.setName(content.getString("type"));
             JSONObject value = content.getJSONObject("value");
             picker.setText(value.getString("text"));
             picker.setLanguage(value.getString("language"));
             return picker;
         } else if(type.equals("date-picker")){
-            EusiContentDatePickerPicker picker = new EusiContentDatePickerPicker();
+            EusiContentDatePicker picker = new EusiContentDatePicker();
             picker.setName(content.getString("type"));
             String timeString = content.getString("value");
             picker.setTimeString(timeString);
@@ -218,7 +218,7 @@ class EusiParser {
             }
             return picker;
         } else if(type.equals("location-picker")){
-            EusiContentLocationPickerPicker picker = new EusiContentLocationPickerPicker();
+            EusiContentLocationPicker picker = new EusiContentLocationPicker();
             picker.setName(content.getString("type"));
             JSONObject value = content.getJSONObject("value");
             picker.setAddress(value.getString("address"));
@@ -226,7 +226,7 @@ class EusiParser {
             picker.setLongitude(value.getDouble("lng"));
             return picker;
         } else if(type.equals("picker-taxonomy")){
-            EusiContentTaxonomyPickerPicker picker = new EusiContentTaxonomyPickerPicker();
+            EusiContentTaxonomyPicker picker = new EusiContentTaxonomyPicker();
             picker.setPickerName(content.getString("type"));
 
             JSONObject taxonomy = content.getJSONObject("taxonomy");
@@ -246,7 +246,7 @@ class EusiParser {
             picker.setTaxonomyItemsList(taxonomyList);
             return picker;
         } else if(type.equals("document-picker")){
-            EusiContentDocumentPickerPicker picker = new EusiContentDocumentPickerPicker();
+            EusiContentDocumentPicker picker = new EusiContentDocumentPicker();
             picker.setName(content.getString("type"));
 
             ArrayList<String> documentList = new ArrayList<>();
@@ -265,7 +265,7 @@ class EusiParser {
             picker.setDocumentList(documentList);
             return picker;
         } else if(type.equals("image-picker")){
-            EusiContentImagePickerPicker picker = new EusiContentImagePickerPicker();
+            EusiContentImagePicker picker = new EusiContentImagePicker();
             picker.setName(content.getString("type"));
 
             ArrayList<String> imageList = new ArrayList<>();
@@ -286,7 +286,7 @@ class EusiParser {
             picker.setImageList(imageList);
             return picker;
         } else if(type.equals("media-picker")){
-            EusiContentMediaPickerPicker picker = new EusiContentMediaPickerPicker();
+            EusiContentMediaPicker picker = new EusiContentMediaPicker();
             picker.setName(content.getString("type"));
 
             ArrayList<String> mediaList = new ArrayList<>();

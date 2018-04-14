@@ -5,7 +5,7 @@ package io.jsguru.eusisdk.models.content;
  * @version 1.0
  */
 
-public class EusiContentLocationPickerPicker extends EusiContentTypePicker {
+public class EusiContentLocationPicker extends EusiContentTypePicker {
     private String name;
     private double latitude;
     private double longitude;
@@ -45,6 +45,6 @@ public class EusiContentLocationPickerPicker extends EusiContentTypePicker {
 
     @Override
     public Class getType() {
-        return EusiContentLocationPickerPicker.class;
+        return EusiContentLocationPicker.class;
     }
 }

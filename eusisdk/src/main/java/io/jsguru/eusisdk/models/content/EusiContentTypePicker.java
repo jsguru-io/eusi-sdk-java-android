@@ -7,6 +7,7 @@ package io.jsguru.eusisdk.models.content;
 
 public abstract class EusiContentTypePicker {
 
-    public abstract Class getType();
+    public abstract String getName();
 
+    public abstract Class getType();
 }

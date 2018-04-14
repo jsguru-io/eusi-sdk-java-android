@@ -5,7 +5,7 @@ package io.jsguru.eusisdk.models.content;
  * @version 1.0
  */
 
-public class EusiContentDatePickerPicker extends EusiContentTypePicker {
+public class EusiContentDatePicker extends EusiContentTypePicker {
     private String name;
     private long timeInMillis;
     private String timeString;
@@ -36,6 +36,6 @@ public class EusiContentDatePickerPicker extends EusiContentTypePicker {
 
     @Override
     public Class getType() {
-        return EusiContentDatePickerPicker.class;
+        return EusiContentDatePicker.class;
     }
 }

@@ -9,7 +9,7 @@ import io.jsguru.eusisdk.models.content.helpers.Media;
  * @version 1.0
  */
 
-public class EusiContentMediaPickerPicker extends EusiContentTypePicker {
+public class EusiContentMediaPicker extends EusiContentTypePicker {
     private String name;
     private ArrayList<Media> media = new ArrayList<>();
     private ArrayList<String> mediaList = new ArrayList<>();
@@ -40,6 +40,6 @@ public class EusiContentMediaPickerPicker extends EusiContentTypePicker {
 
     @Override
     public Class getType() {
-        return EusiContentMediaPickerPicker.class;
+        return EusiContentMediaPicker.class;
     }
 }

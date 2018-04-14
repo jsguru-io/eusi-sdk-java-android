@@ -9,7 +9,7 @@ import io.jsguru.eusisdk.models.content.helpers.Image;
  * @version 1.0
  */
 
-public class EusiContentImagePickerPicker extends EusiContentTypePicker {
+public class EusiContentImagePicker extends EusiContentTypePicker {
     private String name;
     private ArrayList<Image> images = new ArrayList<>();
     private ArrayList<String> imageList = new ArrayList<>();
@@ -40,6 +40,6 @@ public class EusiContentImagePickerPicker extends EusiContentTypePicker {
 
     @Override
     public Class getType() {
-        return EusiContentImagePickerPicker.class;
+        return EusiContentImagePicker.class;
     }
 }

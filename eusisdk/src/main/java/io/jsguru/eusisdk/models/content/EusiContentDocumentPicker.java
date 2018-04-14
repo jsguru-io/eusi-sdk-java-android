@@ -9,7 +9,7 @@ import io.jsguru.eusisdk.models.content.helpers.Document;
  * @version 1.0
  */
 
-public class EusiContentDocumentPickerPicker extends EusiContentTypePicker {
+public class EusiContentDocumentPicker extends EusiContentTypePicker {
     private String name;
     private ArrayList<Document> documents = new ArrayList<>();
     private ArrayList<String> documentList = new ArrayList<>();
@@ -41,6 +41,6 @@ public class EusiContentDocumentPickerPicker extends EusiContentTypePicker {
 
     @Override
     public Class getType() {
-        return EusiContentDocumentPickerPicker.class;
+        return EusiContentDocumentPicker.class;
     }
 }
