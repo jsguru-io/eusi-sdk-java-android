@@ -3,7 +3,7 @@ package io.jsguru.eusisdk.callbacks;
 /**
  * Callback to be used with asynchronous calls in {@link io.jsguru.eusisdk.EusiClient} to submit form
  * <p>
- * Implement {@link #onSuccess(String, String)} to receive response object if request was successful
+ * Implement {@link #onSuccess(String)} to receive form id if request was successful
  * <p>
  * Implement {@link #onFailure(String, String)} to receive error message if request was unsuccessful
  *
@@ -14,10 +14,9 @@ package io.jsguru.eusisdk.callbacks;
 public abstract class EusiSubmitFormCallback extends EusiCallback {
     /**
      * Called if submit form call in EusiClient was successful
-     * @param response Delivery API response
      * @param formId Id of submitted form
      */
-    public abstract void onSuccess(String response, String formId);
+    public abstract void onSuccess(String formId);
 
     /**
      * Called if submit form call in EusiClient was unsuccessful

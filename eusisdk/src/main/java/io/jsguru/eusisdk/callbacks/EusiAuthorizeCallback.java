@@ -3,7 +3,7 @@ package io.jsguru.eusisdk.callbacks;
 /**
  * Callback to be used with authorise asynchronous call in {@link io.jsguru.eusisdk.EusiClient}
  * <p>
- * Implement {@link #onSuccess(String, String)} to receive response and authorization token if request was successful
+ * Implement {@link #onSuccess(String)} to receive authorization token if request was successful
  * <p>
  * Implement {@link #onFailure(String)} to receive error message if request was unsuccessful
  *
@@ -15,12 +15,11 @@ package io.jsguru.eusisdk.callbacks;
 public abstract class EusiAuthorizeCallback extends EusiCallback {
     /**
      * Called if auth call in EusiClient was successful
-     * @param response Delivery API response
      * @param authToken Authorization token
      *
      * @see io.jsguru.eusisdk.EusiClient
      */
-    public abstract void onSuccess(String response, String authToken);
+    public abstract void onSuccess(String authToken);
 
     /**
      * Called if auth call in EusiClient was unsuccessful

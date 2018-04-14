@@ -160,7 +160,7 @@ public class EusiClient {
                             EusiClient.this.setUserToken(null);
 
                             // Call callback
-                            authorizeCallback.onSuccess(responseString, authToken);
+                            authorizeCallback.onSuccess(authToken);
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -276,7 +276,7 @@ public class EusiClient {
                             EusiClient.this.setUserToken(userToken);
 
                             // Call callback
-                            registerCallback.onSuccess(responseString, userToken);
+                            registerCallback.onSuccess(userToken);
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -386,7 +386,7 @@ public class EusiClient {
                             EusiClient.this.setUserToken(userToken);
 
                             // Call callback
-                            logInCallback.onSuccess(responseString, userToken);
+                            logInCallback.onSuccess(userToken);
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -679,7 +679,7 @@ public class EusiClient {
                         formCallback.onFailure(EusiNetworking.getErrorMessage(responseString), EusiNetworking.getValidationMessage(responseString));
                     } else {
                         // Call callback
-                        formCallback.onSuccess(responseString, formID);
+                        formCallback.onSuccess(formID);
                     }
                 }
             };

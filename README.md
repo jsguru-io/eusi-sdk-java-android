@@ -117,7 +117,7 @@ Asynchronous (network operations will be conducted on a separate thread):
 ```
 eusiClient.authorizeAsync(new EusiAuthorizeCallback() {
     @Override
-    public void onSuccess(String response, String authToken) {
+    public void onSuccess(String authToken) {
         //
     }
 
@@ -139,7 +139,7 @@ Asynchronous (network operations will be conducted on a separate thread):
 ```
 eusiClient.logInAsync(email, password, new EusiLogInCallback() {
     @Override
-    public void onSuccess(String response, String userToken) {
+    public void onSuccess(String userToken) {
         //
     }
 
@@ -161,7 +161,7 @@ Asynchronous (network operations will be conducted on a separate thread):
 ```
 eusiClient.registerAsync(firstName, lastName, email, password, new EusiRegisterCallback() {
     @Override
-    public void onSuccess(String response, String userToken) {
+    public void onSuccess(String userToken) {
         //
     }
 
@@ -334,7 +334,7 @@ Asynchronous (network operations will be conducted on a separate thread):
 ```
 eusiClient.submitFormAsync(formId, formBody, new EusiSubmitFormCallback() {
     @Override
-    public void onSuccess(String response, String formId) {
+    public void onSuccess(String formId) {
         //
     }
 
