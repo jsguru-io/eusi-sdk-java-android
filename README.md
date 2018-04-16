@@ -241,6 +241,7 @@ for(int i = 0; i < contentResponse.getContentList().size(); i++){
 ### Filtered content
 Content can be filtered using ```EusiQuery```. It supports filtering by :
 ```
+id
 key
 name
 type
@@ -253,6 +254,7 @@ Sample:
 ```
 // Create query
 EusiQuery query = new EusiQuery.Builder()
+    .withId(String contentId)
     .withKey(String contentKey)
     .withName(contentName)
     .withType(contentType)

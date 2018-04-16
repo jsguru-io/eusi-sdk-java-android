@@ -28,6 +28,17 @@ public class EusiQuery {
     public static class Builder {
         String queryString = "?";
 
+
+        /**
+         * Method sets queryString to fetch one content by it's id
+         * @param contentId Content Id
+         * @return Builder
+         */
+        public Builder withId(String contentId){
+            queryString = "/" + contentId;
+            return this;
+        }
+
         /**
          * @param contentKey Content Key
          * @return Builder
