@@ -29,12 +29,12 @@ public class EusiQuery {
         String queryString = "?";
 
         /**
-         * @param contentId Content Id
+         * @param contentKey Content Key
          * @return Builder
          */
-        public Builder withId(String contentId) {
+        public Builder withKey(String contentKey) {
             prepareString();
-            queryString += "sys.key=" + contentId;
+            queryString += "sys.key=" + contentKey;
             return this;
         }
 

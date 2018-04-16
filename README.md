@@ -241,7 +241,7 @@ for(int i = 0; i < contentResponse.getContentList().size(); i++){
 ### Filtered content
 Content can be filtered using ```EusiQuery```. It supports filtering by :
 ```
-id
+key
 name
 type
 taxonomy
@@ -253,7 +253,7 @@ Sample:
 ```
 // Create query
 EusiQuery query = new EusiQuery.Builder()
-    .withId(contentId)
+    .withKey(String contentKey)
     .withName(contentName)
     .withType(contentType)
     .withTaxonomy(taxonomy)
@@ -368,6 +368,5 @@ eusiClient.submitFormAsync(taxonomyId, new EusiTaxonomyCallback() {
 ```
 
 
-## More examples 
-//TODO change url to match sample module on master
+## More examples //TODO change url to match sample module on master
 For more examples please make sure you refer to [sample](https://github.com/jsguru-io/eusi-sdk-java-android/tree/master/sample). 

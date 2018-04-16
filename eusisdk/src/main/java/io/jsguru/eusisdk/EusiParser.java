@@ -12,6 +12,7 @@ import java.util.Date;
 import io.jsguru.eusisdk.models.EusiPagination;
 import io.jsguru.eusisdk.models.content.EusiContent;
 import io.jsguru.eusisdk.models.content.EusiContentCodePicker;
+import io.jsguru.eusisdk.models.content.EusiContentCompositePicker;
 import io.jsguru.eusisdk.models.content.EusiContentDatePicker;
 import io.jsguru.eusisdk.models.content.EusiContentDocumentPicker;
 import io.jsguru.eusisdk.models.content.EusiContentImagePicker;
@@ -309,7 +310,32 @@ class EusiParser {
             picker.setMedia(media);
             picker.setMediaList(mediaList);
             return picker;
+        } else if (type.equals("composite")){
+            EusiContentCompositePicker picker = new EusiContentCompositePicker();
+            picker.setName(content.getString("type"));
+
+            ArrayList<ArrayList<EusiContentTypePicker>> lists = new ArrayList<>();
+            JSONArray arr = content.getJSONArray("value");
+            for(int i=0; i < arr.length(); i++){
+                JSONObject itemObject = arr.getJSONObject(i);
+                JSONArray arr02 = itemObject.getJSONArray("content");
+                ArrayList<EusiContentTypePicker> list = new ArrayList<>();
+                EusiContentTypePicker oneContent = null;
+                for(int j=0; j < arr02.length(); j++){
+                    oneContent = parseOneContentType(arr02.getJSONObject(j));
+                    if(oneContent != null)
+                        list.add(oneContent);
+                }
+
+                if(list.size() > 0)
+                    lists.add(list);
+            }
+
+            if(lists.size() > 0)
+                picker.setLists(lists);
+            return picker;
         }
+
         //unknown type
         return null;
     }
