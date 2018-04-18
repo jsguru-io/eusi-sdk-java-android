@@ -88,8 +88,6 @@ class EusiNetworking {
         }
     }
 
-
-
     static boolean haveError(String apiResponse) {
         if (apiResponse == null)
             return true;

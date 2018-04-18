@@ -684,7 +684,6 @@ public class EusiClient {
                 }
             };
         }
-
         return eusiNetworking.post(url, headers, formBody.toString(), okHttpCallback);
     }
 
