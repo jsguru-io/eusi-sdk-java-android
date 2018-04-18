@@ -16,6 +16,7 @@ import io.jsguru.eusisdk.models.content.EusiContentCompositePicker;
 import io.jsguru.eusisdk.models.content.EusiContentDatePicker;
 import io.jsguru.eusisdk.models.content.EusiContentDocumentPicker;
 import io.jsguru.eusisdk.models.content.EusiContentImagePicker;
+import io.jsguru.eusisdk.models.content.EusiContentLinkedContenPicker;
 import io.jsguru.eusisdk.models.content.EusiContentLocationPicker;
 import io.jsguru.eusisdk.models.content.EusiContentMediaPicker;
 import io.jsguru.eusisdk.models.content.EusiContentNumberPicker;
@@ -26,6 +27,7 @@ import io.jsguru.eusisdk.models.content.EusiContentTextPicker;
 import io.jsguru.eusisdk.models.content.EusiContentTypePicker;
 import io.jsguru.eusisdk.models.content.helpers.Document;
 import io.jsguru.eusisdk.models.content.helpers.Image;
+import io.jsguru.eusisdk.models.content.helpers.LinkedContent;
 import io.jsguru.eusisdk.models.content.helpers.Media;
 import io.jsguru.eusisdk.models.content.helpers.TaxonomyItem;
 import io.jsguru.eusisdk.models.form.EusiFormField;
@@ -333,6 +335,24 @@ class EusiParser {
 
             if(lists.size() > 0)
                 picker.setLists(lists);
+            return picker;
+        } else if (type.equals("content-link")){
+            EusiContentLinkedContenPicker picker = new EusiContentLinkedContenPicker();
+            picker.setName(content.getString("type"));
+
+            ArrayList<LinkedContent> linkedContent = new ArrayList<>();
+            JSONArray arr = content.getJSONArray("linked_content");
+            for(int i=0; i < arr.length(); i++){
+                JSONObject itemObject = arr.getJSONObject(i);
+                LinkedContent linked = new LinkedContent();
+                linked.setId(itemObject.getString("id"));
+                linked.setKey(itemObject.getString("key"));
+                linked.setName(itemObject.getString("name"));
+
+                linkedContent.add(linked);
+            }
+
+            picker.setLinkedContent(linkedContent);
             return picker;
         }
 
