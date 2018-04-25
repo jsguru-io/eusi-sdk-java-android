@@ -50,22 +50,22 @@ public class EusiQuery {
         }
 
         /**
-         * @param contentName Content name
+         * @param contentTitle Content title
          * @return Builder
          */
-        public Builder withName(String contentName) {
+        public Builder withTitle(String contentTitle) {
             prepareString();
-            queryString += "sys.name=" + contentName;
+            queryString += "sys.title=" + contentTitle;
             return this;
         }
 
         /**
-         * @param contentType Content type
+         * @param contentModel Content model
          * @return Builder
          */
-        public Builder withType(String contentType) {
+        public Builder withContentModel(String contentModel) {
             prepareString();
-            queryString += "sys.type=" + contentType;
+            queryString += "sys.model=" + contentModel;
             return this;
         }
 

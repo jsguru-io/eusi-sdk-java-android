@@ -7,7 +7,7 @@ package io.jsguru.eusisdk.models.content.helpers;
 public class LinkedContent {
     private String id;
     private String key;
-    private String name;
+    private String title;
 
     public String getId() {
         return id;
@@ -25,11 +25,11 @@ public class LinkedContent {
         this.key = key;
     }
 
-    public String getName() {
-        return name;
+    public String getTitle() {
+        return title;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setTitle(String title) {
+        this.title = title;
     }
 }

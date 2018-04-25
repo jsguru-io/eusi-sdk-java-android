@@ -54,8 +54,8 @@ try {
     ArrayList<EusiContent> contentList = response.getContentList();
     for(int i = 0; i < contentList.size(); i++){
         EusiContent content = contentList.get(i);
-        // Log name of content
-        Log.d(TAG, i + ". content: " + content.getName());
+        // Log title of the content
+        Log.d(TAG, i + ". content: " + content.getTitle());
         ...
         }
 
@@ -243,8 +243,8 @@ Content can be filtered using ```EusiQuery```. It supports filtering by :
 ```
 id
 key
-name
-type
+title
+model
 taxonomy
 elements
 ```
@@ -256,8 +256,8 @@ Sample:
 EusiQuery query = new EusiQuery.Builder()
     .withId(String contentId)
     .withKey(String contentKey)
-    .withName(contentName)
-    .withType(contentType)
+    .withTitle(contentTitle)
+    .withContentModel(contentModel)
     .withTaxonomy(taxonomy)
     .withTaxonomyPath(taxonomyPath)
     .withElement(elementName, elementValue)
