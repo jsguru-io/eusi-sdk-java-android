@@ -70,7 +70,7 @@ public class EusiQuery {
         }
 
         /**
-         * @param contentTaxonomy Root taxonomy TODO is this only with root taxonomy or ?
+         * @param contentTaxonomy Root taxonomy
          * @return Builder
          */
         public Builder withTaxonomy(String contentTaxonomy) {

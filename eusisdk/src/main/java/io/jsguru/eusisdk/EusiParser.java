@@ -365,7 +365,7 @@ class EusiParser {
                 LinkedContent linked = new LinkedContent();
                 linked.setId(itemObject.getString("id"));
                 linked.setKey(itemObject.getString("key"));
-                // TODO change name to title
+                // TODO change name to title once API changes it
                 linked.setTitle(itemObject.getString("name"));
 
                 linkedContent.add(linked);
