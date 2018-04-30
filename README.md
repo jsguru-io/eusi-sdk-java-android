@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 
 # eusi-sdk-java-android
 Android SDK for [**EUSI**](https://eusi.io) Delivery API.
@@ -373,6 +372,4 @@ eusiClient.submitFormAsync(taxonomyId, new EusiTaxonomyCallback() {
 
 ## More examples
 For more examples please make sure you refer to [sample](https://github.com/jsguru-io/eusi-sdk-java-android/tree/master/sample). 
-=======
-# eusi-sdk-java-android
->>>>>>> 56ab96dcb9733ed11530eef24c92a011844c4e9b
+
