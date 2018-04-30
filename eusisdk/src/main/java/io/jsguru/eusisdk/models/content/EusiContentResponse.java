@@ -5,8 +5,8 @@ import java.util.ArrayList;
 import io.jsguru.eusisdk.models.EusiPagination;
 
 /**
- * Created by Petar Suvajac on 3/22/2018
- * Contact: petars38@gmail.com / petar.suvajac@jsguru.io
+ * @author Petar Suvajac (petars38@gmail.com / petar.suvajac@jsguru.io)
+ * @version 1.0
  */
 
 public class EusiContentResponse {

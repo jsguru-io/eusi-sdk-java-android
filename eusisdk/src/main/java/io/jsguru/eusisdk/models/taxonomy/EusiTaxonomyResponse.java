@@ -3,8 +3,8 @@ package io.jsguru.eusisdk.models.taxonomy;
 import java.util.ArrayList;
 
 /**
- * Created by Petar Suvajac on 3/26/2018
- * Contact: petars38@gmail.com / petar.suvajac@jsguru.io
+ * @author Petar Suvajac (petars38@gmail.com / petar.suvajac@jsguru.io)
+ * @version 1.0
  */
 
 public class EusiTaxonomyResponse {

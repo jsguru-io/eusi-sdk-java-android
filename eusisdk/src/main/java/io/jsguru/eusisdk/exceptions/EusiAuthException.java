@@ -1,8 +1,10 @@
 package io.jsguru.eusisdk.exceptions;
 
 /**
- * Created by Petar Suvajac on 3/8/2018
- * Contact: petars38@gmail.com / petar.suvajac@jsguru.io
+ * Known exceptions thrown in synchronous authentication calls to Eusi Delivery API
+ *
+ * @author Petar Suvajac (petars38@gmail.com / petar.suvajac@jsguru.io)
+ * @version 1.0
  */
 
 public class EusiAuthException  extends EusiException{

@@ -12,9 +12,11 @@ import java.util.Date;
 import io.jsguru.eusisdk.models.EusiPagination;
 import io.jsguru.eusisdk.models.content.EusiContent;
 import io.jsguru.eusisdk.models.content.EusiContentCodePicker;
+import io.jsguru.eusisdk.models.content.EusiContentCompositePicker;
 import io.jsguru.eusisdk.models.content.EusiContentDatePicker;
 import io.jsguru.eusisdk.models.content.EusiContentDocumentPicker;
 import io.jsguru.eusisdk.models.content.EusiContentImagePicker;
+import io.jsguru.eusisdk.models.content.EusiContentLinkedContenPicker;
 import io.jsguru.eusisdk.models.content.EusiContentLocationPicker;
 import io.jsguru.eusisdk.models.content.EusiContentMediaPicker;
 import io.jsguru.eusisdk.models.content.EusiContentNumberPicker;
@@ -22,9 +24,10 @@ import io.jsguru.eusisdk.models.content.EusiContentResponse;
 import io.jsguru.eusisdk.models.content.EusiContentRichTextPicker;
 import io.jsguru.eusisdk.models.content.EusiContentTaxonomyPicker;
 import io.jsguru.eusisdk.models.content.EusiContentTextPicker;
-import io.jsguru.eusisdk.models.content.EusiContentType;
+import io.jsguru.eusisdk.models.content.EusiContentTypePicker;
 import io.jsguru.eusisdk.models.content.helpers.Document;
 import io.jsguru.eusisdk.models.content.helpers.Image;
+import io.jsguru.eusisdk.models.content.helpers.LinkedContent;
 import io.jsguru.eusisdk.models.content.helpers.Media;
 import io.jsguru.eusisdk.models.content.helpers.TaxonomyItem;
 import io.jsguru.eusisdk.models.form.EusiFormField;
@@ -33,48 +36,48 @@ import io.jsguru.eusisdk.models.taxonomy.EusiTaxonomy;
 import io.jsguru.eusisdk.models.taxonomy.EusiTaxonomyResponse;
 
 /**
- * Created by Petar Suvajac on 3/22/2018
- * Contact: petars38@gmail.com / petar.suvajac@jsguru.io
+ * Util class to map raw response to objects
+ *
+ * @author Petar Suvajac (petars38@gmail.com / petar.suvajac@jsguru.io)
+ * @version 1.0
  */
 
 class EusiParser {
 
-    EusiContentResponse parseContent(String response){
+    EusiContentResponse parseContent(String response) {
         EusiContentResponse eusiContentResponse = new EusiContentResponse();
         eusiContentResponse.setResponseString(response);
+        ArrayList<EusiContent> contentList = new ArrayList<>();
+
         try {
             JSONObject responseObject = new JSONObject(response);
 
-            //pagination
-            JSONObject paginationObject = responseObject.getJSONObject("pagination");
-            EusiPagination pagination = new EusiPagination();
-            pagination.setCount(paginationObject.getInt("count"));
-            pagination.setPage(paginationObject.getInt("page"));
-            pagination.setTotal(paginationObject.getInt("total"));
-            pagination.setTotalPages(paginationObject.getInt("total_pages"));
-            eusiContentResponse.setPagination(pagination);
+            if (responseObject.has("pagination")) {
+                //multiple content objects with pagination
 
-            //content
-            JSONArray contentArray = responseObject.getJSONArray("data");
-            ArrayList<EusiContent> contentList = new ArrayList<>();
-            for(int i=0; i<contentArray.length(); i++){
-                JSONObject contentItemObject = contentArray.getJSONObject(i);
-                EusiContent contentItem = new EusiContent();
-                contentItem.setName(contentItemObject.getString("name"));
-                contentItem.setId(contentItemObject.getString("id"));
-                contentItem.setKey(contentItemObject.getString("key"));
+                //pagination
+                JSONObject paginationObject = responseObject.getJSONObject("pagination");
+                EusiPagination pagination = new EusiPagination();
+                pagination.setCount(paginationObject.getInt("count"));
+                pagination.setPage(paginationObject.getInt("page"));
+                pagination.setTotal(paginationObject.getInt("total"));
+                pagination.setTotalPages(paginationObject.getInt("total_pages"));
+                eusiContentResponse.setPagination(pagination);
 
-                JSONArray arr = contentItemObject.getJSONArray("content");
-                ArrayList<EusiContentType> list = new ArrayList<>();
-                EusiContentType oneContent = null;
-                for(int j=0; j < arr.length(); j++){
-                    oneContent = parseOneContentType(arr.getJSONObject(j));
-                    if(oneContent != null)
-                        list.add(oneContent);
+                //content
+                JSONArray contentArray = responseObject.getJSONArray("data");
+                for (int i = 0; i < contentArray.length(); i++) {
+                    JSONObject contentItemObject = contentArray.getJSONObject(i);
+                    EusiContent contentItem = parseOneContent(contentItemObject);
+                    if (contentItem.getContent().size() > 0)
+                        contentList.add(contentItem);
                 }
-
-                contentItem.setContent(list);
-                contentList.add(contentItem);
+            } else {
+                //response is one content
+                EusiContent contentItem = parseOneContent(responseObject);
+                if (contentItem.getContent().size() > 0) {
+                    contentList.add(contentItem);
+                }
             }
 
             eusiContentResponse.setContentList(contentList);
@@ -86,7 +89,7 @@ class EusiParser {
         return eusiContentResponse;
     }
 
-    EusiTaxonomyResponse parseTaxonomy(String response){
+    EusiTaxonomyResponse parseTaxonomy(String response) {
         EusiTaxonomyResponse eusiTaxonomyResponse = new EusiTaxonomyResponse();
         eusiTaxonomyResponse.setResponseString(response);
 
@@ -100,9 +103,9 @@ class EusiParser {
             ArrayList<EusiTaxonomy> taxonomyList = new ArrayList<>();
             JSONObject items = object.getJSONObject("items");
             JSONArray array = items.getJSONArray("rows");
-            for(int i=0; i < array.length(); i++){
+            for (int i = 0; i < array.length(); i++) {
                 EusiTaxonomy taxonomy = parseTaxonomy(taxonomyList, array.getJSONObject(i));
-                if(taxonomy != null && !taxonomyList.contains(taxonomy))
+                if (taxonomy != null && !taxonomyList.contains(taxonomy))
                     taxonomyList.add(taxonomy);
             }
 
@@ -115,7 +118,7 @@ class EusiParser {
         return eusiTaxonomyResponse;
     }
 
-    EusiFormResponse parseForm(String response){
+    EusiFormResponse parseForm(String response) {
         EusiFormResponse formResponse = new EusiFormResponse();
         formResponse.setResponseString(response);
 
@@ -129,17 +132,17 @@ class EusiParser {
 
             ArrayList<EusiFormField> fields = new ArrayList<>();
             JSONArray array = object.getJSONArray("fields");
-            for(int i=0; i < array.length(); i++){
+            for (int i = 0; i < array.length(); i++) {
                 EusiFormField field = new EusiFormField();
                 JSONObject item = array.getJSONObject(i);
                 field.setKey(item.getString("key"));
                 field.setType(item.getString("type"));
                 field.setRequired(item.getBoolean("required"));
 
-                if(item.has("allowed_types")){
+                if (item.has("allowed_types")) {
                     JSONArray arr = item.getJSONArray("allowed_types");
                     ArrayList<String> allowed = new ArrayList<>();
-                    for (int j=0; j < arr.length(); j++){
+                    for (int j = 0; j < arr.length(); j++) {
                         allowed.add(j, arr.getString(j));
                     }
                     field.setAllowedValues(allowed);
@@ -157,11 +160,11 @@ class EusiParser {
         return formResponse;
     }
 
-    boolean parseSubmitForm(String response){
+    boolean parseSubmitForm(String response) {
         boolean successful = false;
         try {
             JSONObject object = new JSONObject(response);
-            if(object.has("success"))
+            if (object.has("success"))
                 successful = object.getBoolean("success");
         } catch (JSONException e) {
             e.printStackTrace();
@@ -171,34 +174,56 @@ class EusiParser {
 
 
     //Helpers
-    private EusiContentType parseOneContentType(JSONObject content) throws JSONException{
+    private EusiContent parseOneContent(JSONObject contentItemObject) throws JSONException {
+        EusiContent contentItem = new EusiContent();
+        contentItem.setTitle(contentItemObject.getString("title"));
+        contentItem.setId(contentItemObject.getString("id"));
+        contentItem.setKey(contentItemObject.getString("key"));
+        contentItem.setContentModelId(contentItemObject.getString("content_model_id"));
+
+        JSONArray arr = contentItemObject.getJSONArray("content");
+        ArrayList<EusiContentTypePicker> list = new ArrayList<>();
+        EusiContentTypePicker oneContent = null;
+        for (int j = 0; j < arr.length(); j++) {
+            oneContent = parseOneContentTypePicker(arr.getJSONObject(j));
+            if (oneContent != null)
+                list.add(oneContent);
+        }
+
+        if (list.size() > 0) {
+            contentItem.setContent(list);
+        }
+        return contentItem;
+    }
+
+    private EusiContentTypePicker parseOneContentTypePicker(JSONObject content) throws JSONException {
         String type = content.getString("object_type");
 
-        if(type == null || type.isEmpty()){
+        if (type == null || type.isEmpty()) {
             return null;
-        } else if (type.equals("input-text")){
+        } else if (type.equals("input-text")) {
             EusiContentTextPicker picker = new EusiContentTextPicker();
             picker.setName(content.getString("type"));
             picker.setText(content.getString("value"));
             return picker;
-        } else if(type.equals("input-number")){
+        } else if (type.equals("input-number")) {
             EusiContentNumberPicker picker = new EusiContentNumberPicker();
             picker.setName(content.getString("type"));
             picker.setNumber(content.getInt("value"));
             return picker;
-        } else if(type.equals("rich-text-input")){
+        } else if (type.equals("rich-text-input")) {
             EusiContentRichTextPicker picker = new EusiContentRichTextPicker();
             picker.setName(content.getString("type"));
             picker.setText(content.getString("value"));
             return picker;
-        } else if(type.equals("code-picker")){
+        } else if (type.equals("code-picker")) {
             EusiContentCodePicker picker = new EusiContentCodePicker();
             picker.setName(content.getString("type"));
             JSONObject value = content.getJSONObject("value");
             picker.setText(value.getString("text"));
             picker.setLanguage(value.getString("language"));
             return picker;
-        } else if(type.equals("date-picker")){
+        } else if (type.equals("date-picker")) {
             EusiContentDatePicker picker = new EusiContentDatePicker();
             picker.setName(content.getString("type"));
             String timeString = content.getString("value");
@@ -213,7 +238,7 @@ class EusiParser {
                 e.printStackTrace();
             }
             return picker;
-        } else if(type.equals("location-picker")){
+        } else if (type.equals("location-picker")) {
             EusiContentLocationPicker picker = new EusiContentLocationPicker();
             picker.setName(content.getString("type"));
             JSONObject value = content.getJSONObject("value");
@@ -221,7 +246,7 @@ class EusiParser {
             picker.setLatitude(value.getDouble("lat"));
             picker.setLongitude(value.getDouble("lng"));
             return picker;
-        } else if(type.equals("picker-taxonomy")){
+        } else if (type.equals("picker-taxonomy")) {
             EusiContentTaxonomyPicker picker = new EusiContentTaxonomyPicker();
             picker.setPickerName(content.getString("type"));
 
@@ -233,7 +258,7 @@ class EusiParser {
             ArrayList<String> taxonomyList = new ArrayList<>();
             ArrayList<TaxonomyItem> taxonomies = new ArrayList<>();
             JSONArray arr = taxonomy.getJSONArray("taxonomy_items");
-            for(int i=0; i < arr.length(); i++){
+            for (int i = 0; i < arr.length(); i++) {
                 taxonomies.add(i, parseOneTaxonomyItem(arr.getJSONObject(i)));
                 taxonomyList.add(taxonomies.get(i).getName());
             }
@@ -241,14 +266,14 @@ class EusiParser {
             picker.setTaxonomyItems(taxonomies);
             picker.setTaxonomyItemsList(taxonomyList);
             return picker;
-        } else if(type.equals("document-picker")){
+        } else if (type.equals("document-picker")) {
             EusiContentDocumentPicker picker = new EusiContentDocumentPicker();
             picker.setName(content.getString("type"));
 
             ArrayList<String> documentList = new ArrayList<>();
             ArrayList<Document> documents = new ArrayList<>();
             JSONArray arr = content.getJSONArray("media");
-            for(int i=0; i < arr.length(); i++){
+            for (int i = 0; i < arr.length(); i++) {
                 JSONObject item = arr.getJSONObject(i);
                 Document doc = new Document();
                 doc.setId(item.getString("id"));
@@ -260,14 +285,14 @@ class EusiParser {
             picker.setDocuments(documents);
             picker.setDocumentList(documentList);
             return picker;
-        } else if(type.equals("image-picker")){
+        } else if (type.equals("image-picker")) {
             EusiContentImagePicker picker = new EusiContentImagePicker();
             picker.setName(content.getString("type"));
 
             ArrayList<String> imageList = new ArrayList<>();
             ArrayList<Image> images = new ArrayList<>();
             JSONArray arr = content.getJSONArray("media");
-            for(int i=0; i < arr.length(); i++){
+            for (int i = 0; i < arr.length(); i++) {
                 JSONObject item = arr.getJSONObject(i);
                 Image image = new Image();
                 image.setId(item.getString("id"));
@@ -281,20 +306,20 @@ class EusiParser {
             picker.setImages(images);
             picker.setImageList(imageList);
             return picker;
-        } else if(type.equals("media-picker")){
+        } else if (type.equals("media-picker")) {
             EusiContentMediaPicker picker = new EusiContentMediaPicker();
             picker.setName(content.getString("type"));
 
             ArrayList<String> mediaList = new ArrayList<>();
             ArrayList<Media> media = new ArrayList<>();
             JSONArray arr = content.getJSONArray("media");
-            for(int i=0; i < arr.length(); i++){
+            for (int i = 0; i < arr.length(); i++) {
                 JSONObject itemObject = arr.getJSONObject(i);
                 Media item = new Media();
                 item.setId(itemObject.getString("id"));
                 item.setUrl(itemObject.getString("url"));
                 item.setType(itemObject.getString("type"));
-                if(item.getType().equalsIgnoreCase("image")){
+                if (item.getType().equalsIgnoreCase("image")) {
                     item.setWidth(itemObject.getInt("width"));
                     item.setHeight(itemObject.getInt("height"));
                 }
@@ -305,12 +330,56 @@ class EusiParser {
             picker.setMedia(media);
             picker.setMediaList(mediaList);
             return picker;
+        } else if (type.equals("composite")) {
+            EusiContentCompositePicker picker = new EusiContentCompositePicker();
+            picker.setName(content.getString("type"));
+
+            ArrayList<ArrayList<EusiContentTypePicker>> lists = new ArrayList<>();
+            JSONArray arr = content.getJSONArray("value");
+            for (int i = 0; i < arr.length(); i++) {
+                JSONObject itemObject = arr.getJSONObject(i);
+                JSONArray arr02 = itemObject.getJSONArray("content");
+                ArrayList<EusiContentTypePicker> list = new ArrayList<>();
+                EusiContentTypePicker oneContent = null;
+                for (int j = 0; j < arr02.length(); j++) {
+                    oneContent = parseOneContentTypePicker(arr02.getJSONObject(j));
+                    if (oneContent != null)
+                        list.add(oneContent);
+                }
+
+                if (list.size() > 0)
+                    lists.add(list);
+            }
+
+            if (lists.size() > 0)
+                picker.setLists(lists);
+            return picker;
+        } else if (type.equals("content-link")) {
+            EusiContentLinkedContenPicker picker = new EusiContentLinkedContenPicker();
+            picker.setName(content.getString("type"));
+
+            ArrayList<LinkedContent> linkedContent = new ArrayList<>();
+            JSONArray arr = content.getJSONArray("linked_content");
+            for (int i = 0; i < arr.length(); i++) {
+                JSONObject itemObject = arr.getJSONObject(i);
+                LinkedContent linked = new LinkedContent();
+                linked.setId(itemObject.getString("id"));
+                linked.setKey(itemObject.getString("key"));
+                // TODO change name to title once API changes it
+                linked.setTitle(itemObject.getString("name"));
+
+                linkedContent.add(linked);
+            }
+
+            picker.setLinkedContent(linkedContent);
+            return picker;
         }
+
         //unknown type
         return null;
     }
 
-    private TaxonomyItem parseOneTaxonomyItem(JSONObject itemObject) throws JSONException{
+    private TaxonomyItem parseOneTaxonomyItem(JSONObject itemObject) throws JSONException {
         TaxonomyItem item = new TaxonomyItem();
         item.setId(itemObject.getString("id"));
         item.setName(itemObject.getString("name"));
@@ -327,12 +396,12 @@ class EusiParser {
         taxonomy.setPath(object.getString("path"));
         taxonomy.setHierarchyLevel(object.getInt("hierarchy_level"));
 
-        if(object.has("children")){
+        if (object.has("children")) {
             ArrayList<EusiTaxonomy> children = new ArrayList<>();
             JSONArray arr = object.getJSONArray("children");
-            for(int i=0; i < arr.length(); i++){
+            for (int i = 0; i < arr.length(); i++) {
                 EusiTaxonomy temp = parseTaxonomy(list, arr.getJSONObject(i));
-                if(temp != null){
+                if (temp != null) {
                     children.add(temp);
                 }
             }
@@ -340,7 +409,7 @@ class EusiParser {
         }
 
         //add taxonomy to defaultList in TaxonomyResponse
-        if(!list.contains(taxonomy))
+        if (!list.contains(taxonomy))
             list.add(taxonomy);
         return taxonomy;
     }

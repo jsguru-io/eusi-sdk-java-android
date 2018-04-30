@@ -3,23 +3,23 @@ package io.jsguru.eusisdk.models.content;
 import java.util.ArrayList;
 
 /**
- * Created by Petar Suvajac on 3/22/2018
- * Contact: petars38@gmail.com / petar.suvajac@jsguru.io
+ * @author Petar Suvajac (petars38@gmail.com / petar.suvajac@jsguru.io)
+ * @version 1.0
  */
 
 public class EusiContent {
     private String id;
-    private String name;
+    private String title;
     private String key;
-    private String templateID;
+    private String contentModelId;
     private long publishedAt;
-    private ArrayList<EusiContentType> contentList = new ArrayList<>();
+    private ArrayList<EusiContentTypePicker> contentList = new ArrayList<>();
 
-    public ArrayList<EusiContentType> getContent() {
+    public ArrayList<EusiContentTypePicker> getContent() {
         return contentList;
     }
 
-    public void setContent(ArrayList<EusiContentType> contentList) {
+    public void setContent(ArrayList<EusiContentTypePicker> contentList) {
         this.contentList = contentList;
     }
 
@@ -31,12 +31,12 @@ public class EusiContent {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getTitle() {
+        return title;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public String getKey() {
@@ -47,13 +47,14 @@ public class EusiContent {
         this.key = key;
     }
 
-    public String getTemplateID() {
-        return templateID;
+    public String getContentModelId() {
+        return contentModelId;
     }
 
-    public void setTemplateID(String templateID) {
-        this.templateID = templateID;
+    public void setContentModelId(String contentModelId) {
+        this.contentModelId = contentModelId;
     }
+
 
     public long getPublishedAt() {
         return publishedAt;

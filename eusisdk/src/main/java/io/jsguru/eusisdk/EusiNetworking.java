@@ -16,8 +16,10 @@ import okhttp3.RequestBody;
 import okhttp3.Response;
 
 /**
- * Created by Petar Suvajac on 3/8/2018
- * Contact: petars38@gmail.com / petar.suvajac@jsguru.io
+ * Util class for networking operations
+ *
+ * @author Petar Suvajac (petars38@gmail.com / petar.suvajac@jsguru.io)
+ * @version 1.0
  */
 
 class EusiNetworking {
@@ -35,12 +37,14 @@ class EusiNetworking {
         Request.Builder requestBuilder = new Request.Builder()
                 .url(url);
 
-        // Set headers
-        Iterator<String> iterator = headers.keySet().iterator();
-        while (iterator.hasNext()) {
-            String key = (String) iterator.next();
-            String value = (String) headers.get(key);
-            requestBuilder.addHeader(key, value);
+        if(headers != null){
+            // Set headers
+            Iterator<String> iterator = headers.keySet().iterator();
+            while (iterator.hasNext()) {
+                String key = (String) iterator.next();
+                String value = (String) headers.get(key);
+                requestBuilder.addHeader(key, value);
+            }
         }
 
         if(callback == null){
@@ -63,12 +67,14 @@ class EusiNetworking {
                 .url(url)
                 .post(RequestBody.create(mediaType, requestBody));
 
-        // Set headers
-        Iterator<String> iterator = headers.keySet().iterator();
-        while (iterator.hasNext()) {
-            String key = (String) iterator.next();
-            String value = (String) headers.get(key);
-            requestBuilder.addHeader(key, value);
+        if(headers != null){
+            // Set headers
+            Iterator<String> iterator = headers.keySet().iterator();
+            while (iterator.hasNext()) {
+                String key = (String) iterator.next();
+                String value = (String) headers.get(key);
+                requestBuilder.addHeader(key, value);
+            }
         }
 
         if(callback == null){
@@ -81,8 +87,6 @@ class EusiNetworking {
             return null;
         }
     }
-
-
 
     static boolean haveError(String apiResponse) {
         if (apiResponse == null)

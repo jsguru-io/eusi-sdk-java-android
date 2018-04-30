@@ -5,11 +5,11 @@ import java.util.ArrayList;
 import io.jsguru.eusisdk.models.content.helpers.Image;
 
 /**
- * Created by Petar Suvajac on 3/20/2018
- * Contact: petars38@gmail.com / petar.suvajac@jsguru.io
+ * @author Petar Suvajac (petars38@gmail.com / petar.suvajac@jsguru.io)
+ * @version 1.0
  */
 
-public class EusiContentImagePicker extends EusiContentType {
+public class EusiContentImagePicker extends EusiContentTypePicker {
     private String name;
     private ArrayList<Image> images = new ArrayList<>();
     private ArrayList<String> imageList = new ArrayList<>();

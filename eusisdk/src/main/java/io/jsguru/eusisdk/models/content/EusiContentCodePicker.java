@@ -1,11 +1,11 @@
 package io.jsguru.eusisdk.models.content;
 
 /**
- * Created by Petar Suvajac on 3/20/2018
- * Contact: petars38@gmail.com / petar.suvajac@jsguru.io
+ * @author Petar Suvajac (petars38@gmail.com / petar.suvajac@jsguru.io)
+ * @version 1.0
  */
 
-public class EusiContentCodePicker extends EusiContentType {
+public class EusiContentCodePicker extends EusiContentTypePicker {
     private String name;
     private String text;
     private String language;

@@ -2,15 +2,14 @@ package io.jsguru.eusisdk.models.content;
 
 import java.util.ArrayList;
 
-import io.jsguru.eusisdk.models.content.helpers.Document;
 import io.jsguru.eusisdk.models.content.helpers.Media;
 
 /**
- * Created by Petar Suvajac on 3/20/2018
- * Contact: petars38@gmail.com / petar.suvajac@jsguru.io
+ * @author Petar Suvajac (petars38@gmail.com / petar.suvajac@jsguru.io)
+ * @version 1.0
  */
 
-public class EusiContentMediaPicker extends EusiContentType {
+public class EusiContentMediaPicker extends EusiContentTypePicker {
     private String name;
     private ArrayList<Media> media = new ArrayList<>();
     private ArrayList<String> mediaList = new ArrayList<>();
