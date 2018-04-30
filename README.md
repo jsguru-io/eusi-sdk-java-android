@@ -26,11 +26,20 @@ Android SDK for [**EUSI**](https://eusi.io) Delivery API.
 
 ## Setup
 
-Gradle:
+Gradle (project): 
+```
+allprojects {
+    repositories {
+        ...
+        maven { url 'https://jitpack.io' }
+    }
+}
+```
+Gradle (module):
 ```
 dependencies {
     ...
-    implementation '...'
+    implementation 'com.github.jsguru-io:eusi-sdk-java-android:1.0.0'
 }
 ```
 
